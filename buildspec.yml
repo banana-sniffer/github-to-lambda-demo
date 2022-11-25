@@ -17,14 +17,7 @@ phases:
       - zip -g deployment_package.zip lambda_function.py
   post_build:
     commands:
-      # - echo "Updating lambda Function..."
-      # - aws lambda update-function-code --function-name github-to-lambda-demo --zip-file fileb://deployment_package.zip
-      # - echo "DONE!!"
-      - ls
-      - pwd
       - echo "Adding lambda function code to s3 bucket..."
       - aws s3 mv deployment_package.zip s3://github-to-lambda-s3-test
+      - aws lambda update-function-code --function-name github-to-lambda-demo --s3-bucket github-to-lambda-s3-test --s3-key deployment_package.zip
       - echo "DONE!!"
-
-# So instead of updating the lambda function, we should generate an s3 bucket and upload the file there
-# And then have the lambda function reference the s3 bucket.
