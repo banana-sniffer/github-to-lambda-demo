@@ -10,10 +10,14 @@ phases:
       - pip install -r requirements.txt -t lib
   build:
     commands:
+      - ls
+      - pwd
       - echo "Zipping deployment package..."
       - cd lib
+      - ls
       - zip -r9 ../deployment_package.zip .
       - cd ..
+      - ls
       - zip -g deployment_package.zip lambda_function.py
   post_build:
     commands:
